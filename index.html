@@ -21,10 +21,10 @@
    </div>
    <div id="transection-area">
        <div class="row">
-           <div class="col-md-4">
-              <div class="deposite status">
-                <h5>deposite</h5>
-                <h2>$00</h2>
+            <div class="col-md-4">
+              <div class="deposit status">
+                <h5>deposit</h5>
+                <h2>$ <span id="currentAmount">00</span></h2>
               </div>
            </div>
            <div class="col-md-4">
@@ -36,30 +36,31 @@
            <div class="col-md-4">
               <div class="balance status">
                 <h5>balance</h5>
-                <h2>$1200</h2>
+                <h2>$ <span id="currentBalance">1240</span></h2>
               </div>
            </div>
        </div>
        <div class="row">
            <div class="col-md-6">
                <div id="box">
-                <h4>Deposite</h4>
-                <input type="text" class="form-control" placeholder="$money">
+                <h4>Deposit</h4>
+                <input id="depositAmount" type="text" class="form-control" placeholder="$money">
                 <br>
-                <button class="btn btn-success">Deposite</button>
+                <button id="add-deposit" class="btn btn-success">Deposit</button>
                </div>
            </div>
            <div class="col-md-6">
                <div id="box">
                 <h4>Withdrow</h4>
-                <input type="text" class="form-control" placeholder="withdrow your money">
+                <input id="withdrowMoney" type="text" class="form-control" placeholder="withdrow your money">
                 <br>
-                <button class="btn btn-success">Withdrow</button>
+                <button id="add-withdrow" class="btn btn-success">Withdrow</button>
                </div>
            </div>
        </div>
    </div>
    <script>
+    // login button even handler   
        const loginBtn = document.getElementById("verify");
        loginBtn.addEventListener("click", function(){
           const loginArea = document.getElementById("login-area");
@@ -67,6 +68,47 @@
           const transectionArea = document.getElementById("transection-area");
           transectionArea.style.display = "block"
        })
+    //    deposit button event handler
+       const depositBtn = document.getElementById("add-deposit");
+       depositBtn.addEventListener("click",function(){
+    //   const depositAdd = document.getElementById("depositAmount").value;
+    //   const depositNum = parseFloat(depositAdd);
+    const depositNum = inputText("depositAmount");
+
+    //   const currentDeposite = document.getElementById("currentAmount").innerText;
+    //   const currentDepoNum = parseFloat(currentDeposite);
+    //   const depoTotal = depositNum + currentDepoNum;
+    //   document.getElementById("currentAmount").innerText = depoTotal;
+
+    //   const currentBalance = document.getElementById("currentBalance").innerText;
+    //   const currentBalanceNum = parseFloat(currentBalance);
+    //   const totalBalance = currentBalanceNum + depositNum;
+    //   document.getElementById("currentBalance").innerText = totalBalance;
+        updateSpanText("currentAmount", depositNum); 
+        updateSpanText("currentBalance", depositNum);   
+      document.getElementById("depositAmount").value = "";    
+       })
+       //withdrow button even handler
+       const withdrowBtn = document.getElementById("add-withdrow");
+       withdrowBtn.addEventListener("click",function(){
+        // const withdrowMoney = document.getElementById("withdrowMoney").value;
+        // const withdrowNum = parseFloat(withdrowMoney);
+        const Number = inputText("withdrowMoney");
+        console.log(AmountNumber)
+       })
+       function inputText(id){
+        const Money = document.getElementById(id).value;
+        const AmountNumber = parseFloat(Money);
+        return AmountNumber;
+       }
+
+
+       function updateSpanText(id , depositNum){
+            const current = document.getElementById(id).innerText;
+            const currentNumber = parseFloat(current);
+            const total = currentNumber + depositNum;
+            document.getElementById(id).innerText = total;
+       }
    </script>
 </body>
 </html>
